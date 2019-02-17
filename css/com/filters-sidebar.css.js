@@ -3,7 +3,7 @@ import {css} from '/vendor/beaker-app-stdlib/vendor/lit-element/lit-element.js'
 const cssStr = css`
 :host {
   display: block;
-  color: #777;
+  color: var(--colot-text--muted);
   font-size: 14px;
 }
 
