@@ -27,7 +27,7 @@ class Search extends LitElement {
         <search-control></search-control>
         <div class="spacer"></div>
         <a @click=${this.onClickAppMenu}><span class="fas fa-th"></span></a>
-        <a><span class="fas fa-bell"></span></a>
+        <a class="todo"><span class="fas fa-bell"></span></a>
         <a href="dat://profile"><img class="profile" src="/img/tmp-profile.png"></a>
       </header>
       <nav>

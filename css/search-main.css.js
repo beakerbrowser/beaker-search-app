@@ -33,6 +33,30 @@ header a {
   cursor: pointer;
 }
 
+header a:hover {
+  color: #777;
+}
+
+header a.todo {
+  cursor: default;
+  color: #aaa;
+}
+
+header a.todo:hover {
+  position: relative;
+}
+
+header a.todo:hover:after {
+  content: 'TODO';
+  position: absolute;
+  left: -10px;
+  top: 2px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #222;
+  text-shadow: 0 0 3px #fff;
+}
+
 header img.profile {
   border-radius: 50%;
   width: 40px;
