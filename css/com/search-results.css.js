@@ -10,6 +10,17 @@ ${commonCSS}
   font-size: 14px;
 }
 
+.result.post {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 16px;
+  cursor: pointer;
+}
+
+.result.post:hover {
+  border-color: #bbb;
+}
+
 .result a {
   cursor: pointer;
 }
@@ -23,6 +34,11 @@ ${commonCSS}
   display: block;
   width: 50px;
   height: 50px;
+  border-radius: 50%;
+}
+
+.result-details {
+  flex: 1;
 }
 
 .title {
@@ -38,6 +54,23 @@ ${commonCSS}
 
 .url {
   color: green;
+}
+
+.post-body {
+  padding: 0 0 10px;
+  font-size: 16px;
+}
+
+.post-author {
+  color: var(--blue);
+}
+
+.post-author:hover {
+  text-decoration: underline;
+}
+
+.post-date {
+  color: var(--color-text--muted);
 }
 `
 export default cssStr

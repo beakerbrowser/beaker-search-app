@@ -7,10 +7,6 @@ const cssStr = css`
   font-size: 14px;
 }
 
-h5 {
-  margin: 0 0 15px;
-}
-
 ul {
   list-style: none;
   margin: 0 0 15px;

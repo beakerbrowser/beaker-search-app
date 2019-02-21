@@ -25,6 +25,15 @@ class SearchControl extends LitElement {
 
   onKeyupInput (e) {
     this.query = e.currentTarget.value
+    if (e.key === 'Enter') {
+      this.dispatchEvent(new CustomEvent('submit-query', {detail: {query: this.query}}))
+    }
+  }
+
+  focus () {
+    var el = this.shadowRoot.querySelector('input.search')
+    el.focus()
+    el.selectionStart = el.selectionEnd = el.value.length // put the cursor at the end
   }
 }
 SearchControl.styles = searchControlCSS

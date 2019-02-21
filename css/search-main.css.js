@@ -1,71 +1,17 @@
 import {css} from '/vendor/beaker-app-stdlib/vendor/lit-element/lit-element.js'
+import headerCSS from './com/header.css.js'
+import otherEnginesCSS from './com/other-engines.css.js'
 
 const cssStr = css`
-header {
-  display: flex;
-  background: #f7f7f7;
-  height: 50px;
-  padding: 10px 20px;
-  align-items: center;
-}
+${headerCSS}
+${otherEnginesCSS}
 
-header img.brand {
-  width: 50px;
-  height: 50px;
-  margin-right: 20px;
-}
-
-header search-control {
-  width: 600px;
-  height: 40px;
-}
-
-header .spacer {
-  flex: 1;
-}
-
-header a {
-  margin-right: 30px;
-  font-size: 18px;
-  font-weight: 300;
-  color: #555;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-header a:hover {
-  color: #777;
-}
-
-header a.todo {
-  cursor: default;
-  color: #aaa;
-}
-
-header a.todo:hover {
-  position: relative;
-}
-
-header a.todo:hover:after {
-  content: 'TODO';
-  position: absolute;
-  left: -10px;
-  top: 2px;
-  font-size: 12px;
-  font-weight: bold;
-  color: #222;
-  text-shadow: 0 0 3px #fff;
-}
-
-header img.profile {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  box-shadow: inset 0 2px 3px rgba(0,0,0,.15);
+:host {
+  --gray-bg: #f7f7f7;
 }
 
 nav {
-  background: #f7f7f7;
+  background: var(--gray-bg);
   padding: 0 90px;
   height: 40px;
   border-bottom: 1px solid #ddd;
@@ -82,47 +28,38 @@ main {
   padding: 0 90px;
 }
 
-main search-results {
+main .search-results-column {
   width: 600px;
   margin-right: 50px;
 }
 
-.other-engines {
+main .search-sidebar-column h5 {
+  color: var(--color-text--muted);
+  margin: 0 0 15px;
+}
+
+div.noquery-container {
+  background: var(--gray-bg);
+  height: 100vh;
+}
+
+div.noquery-container main {
   width: 600px;
-  padding: 30px 90px;
-}
-
-.other-engines-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 10px;
-}
-
-.other-engines-grid a {
-  display: inline-block;
-  border: 1px solid #ddd;
-  padding: 15px 20px;
-
-  /* remove link styles */
-  color: var(--color-text);
-  text-decoration: none;
-
-  line-height: 24px; /* same height as the image */
-}
-
-.other-engines-grid a:hover {
-  border-color: #ccc;
-  background: #fafafa;
-}
-
-.other-engines-grid a img {
-  width: 24px;
-  height: 24px;
-  vertical-align: middle;
-
-  /* vertical align is always a few px off */
+  margin: 0 auto;
   position: relative;
-  top: -2px;
+  top: 35%;
+  align-items: center;
+}
+
+div.noquery-container img.brand {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
+div.noquery-container search-control {
+  width: 600px;
+  height: 40px;
 }
 `
 export default cssStr
