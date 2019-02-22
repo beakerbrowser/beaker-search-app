@@ -39,23 +39,32 @@ class SearchResults extends LitElement {
   }
 
   renderPostResult (result) {
+    // NOTE
+    // the post result uses the "link-result-wrapper" and overlay so that it can embed links within links
+    // HTML doesn't allow <a> within <a>, so we use the overlay to position them visually
+    // -prf
     return html`
-      <div
-        class="result post"
-        data-href="${result.url}"
-        @mousedown=${this.onClickPostResult}
-      >
-        <div class="result-thumb">
-          <a href="${result.record.author.url}"><img src="${result.record.author.url}/thumb"></a>
-        </div>
-        <div class="result-details">
-          <div class="post-body">${unsafeHTML(highlightSearchResult(result.content.body, this.highlightNonce))}</div>
-          <div class="post-details">
-            <a class="post-author"  href="${result.record.author.url}">${result.record.author.title}</a>
-            &middot;
-            <span class="post-date">${timeDifference(result.createdAt)}</span>
+      <div class="link-result-wrapper post">
+        <a class="result post" href="${result.url}">
+          <div class="result-thumb-placeholder"></div>
+          <div class="result-details">
+            <div class="post-body">${unsafeHTML(highlightSearchResult(result.content.body, this.highlightNonce))}</div>
+            <div class="post-details-placeholder"></div>
           </div>
-        </div>
+        </a>
+        <div class="link-result-overlay">
+          <div class="result-thumb">
+            <a href="${result.record.author.url}"><img src="${result.record.author.url}/thumb"></a>
+          </div>
+          <div class="result-details">
+            <div class="post-body-placeholder"></div>
+            <div class="post-details">
+              <a class="post-author" href="${result.record.author.url}">${result.record.author.title}</a>
+              &middot;
+              <span class="post-date">${timeDifference(result.createdAt)}</span>
+            </div>
+          </div>
+        </div> 
       </div>
     `
   }
@@ -73,20 +82,6 @@ class SearchResults extends LitElement {
         </div>
       </div>
     `
-  }
-
-  // events
-  // =
-
-  onClickPostResult (e) {
-    if (findParent(e.target, el => el.tagName === 'A')) {
-      // ignore, user clicked on a link inside the post result
-      return
-    }
-
-    var popup = e.metaKey || e.ctrlKey || e.button === 1
-    if (popup) window.open(e.currentTarget.dataset.href)
-    else window.location = e.currentTarget.dataset.href
   }
 }
 SearchResults.styles = searchResultsCSS

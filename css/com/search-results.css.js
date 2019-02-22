@@ -25,7 +25,8 @@ ${commonCSS}
   cursor: pointer;
 }
 
-.result-thumb {
+.result-thumb,
+.result-thumb-placeholder {
   width: 50px;
   margin-right: 16px;
 }
@@ -35,6 +36,7 @@ ${commonCSS}
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .result-details {
@@ -56,9 +58,11 @@ ${commonCSS}
   color: green;
 }
 
-.post-body {
+.post-body,
+.post-body-placeholder {
   padding: 0 0 10px;
   font-size: 16px;
+  height: 46px; /* has to be fixed height for the overlay to position correctly against it */
 }
 
 .post-author {
@@ -71,6 +75,29 @@ ${commonCSS}
 
 .post-date {
   color: var(--color-text--muted);
+}
+
+.post-details-placeholder {
+  height: 16px;
+}
+
+/* this weird link-result-wrapper and overlay are a solution to having the whole result
+   be a link while also having links inside it */
+
+.link-result-wrapper {
+  position: relative;
+}
+
+.link-result-overlay {
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.link-result-wrapper.post .link-result-overlay {
+  padding: 16px;
 }
 `
 export default cssStr
