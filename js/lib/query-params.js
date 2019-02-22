@@ -3,7 +3,7 @@ export function setParams (kv) {
   for (var k in kv) {
     url.searchParams.set(k, kv[k])
   }
-  window.history.pushState({}, null, url)
+  window.history.replaceState({}, null, url)
 }
 
 export function getParam (k, fallback = '') {
