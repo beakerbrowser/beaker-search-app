@@ -42,7 +42,7 @@ class SearchResults extends LitElement {
     return html`
       <div
         class="result post"
-        data-href="dat://feed/?view=${encodeURIComponent(result.url)}"
+        data-href="${result.url}"
         @mousedown=${this.onClickPostResult}
       >
         <div class="result-thumb">
