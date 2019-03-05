@@ -1,0 +1,19 @@
+{
+  "name": "@beaker/search-app",
+  "version": "1.0.0",
+  "description": "The Beaker \"Search\" app ",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beakerbrowser/beaker-search-app.git"
+  },
+  "author": "Paul Frazee <pfrazee@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/beakerbrowser/beaker-search-app/issues"
+  },
+  "homepage": "https://github.com/beakerbrowser/beaker-search-app#readme"
+}
