@@ -4,6 +4,7 @@ const cssStr = css`
 .other-engines {
   width: 600px;
   margin: 60px 0;
+  color: #777;
 }
 
 .other-engines-grid {
@@ -18,7 +19,7 @@ const cssStr = css`
   padding: 15px 20px;
 
   /* remove link styles */
-  color: var(--color-text);
+  color: inherit;
   text-decoration: none;
 
   line-height: 24px; /* same height as the image */

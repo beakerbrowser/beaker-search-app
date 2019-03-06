@@ -6,7 +6,7 @@ import * as appMenu from '/vendor/beaker-app-stdlib/js/com/app-menu.js'
 import searchMainCSS from '../css/search-main.css.js'
 import './com/search-control.js'
 import './com/category-nav.js'
-import './com/filters-group.js'
+import './com/filters-dropdown.js'
 import './com/search-results.js'
 
 const DAY_IN_MS = 8.64e+7
@@ -164,8 +164,10 @@ class Search extends LitElement {
       <nav>
         <category-nav current-tab=${this.category} @change-tab=${this.onSetCategory}></category-nav>
       </nav>
-      <div class="num-results">
-        ${this.results.length} ${pluralize(this.results.length, 'result')} found.
+      <div class="search-controls">
+        <div>${this.results.length} ${pluralize(this.results.length, 'result')} found.</div>
+        <filters-dropdown selected=${this.hops} .choices=${this.hopsFilterChoices} @select=${this.onSelectHopsFilter}></filters-dropdown>
+        <filters-dropdown selected=${this.since} .choices=${this.sinceFilterChoices} @select=${this.onSelectSinceFilter}></filters-dropdown>
       </div>
       <main>
         <div class="search-results-column">
@@ -173,9 +175,6 @@ class Search extends LitElement {
           ${this.renderOtherEngines()}
         </div>
         <div class="search-sidebar-column">
-          <h5>Filters</h5>
-          <filters-group selected=${this.hops} .choices=${this.hopsFilterChoices} @select=${this.onSelectHopsFilter}></filters-group>
-          <filters-group selected=${this.since} .choices=${this.sinceFilterChoices} @select=${this.onSelectSinceFilter}></filters-group>
         </div>
       </main>
     `

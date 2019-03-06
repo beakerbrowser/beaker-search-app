@@ -17,10 +17,16 @@ nav {
   border-bottom: 1px solid #ddd;
 }
 
-.num-results {
+.search-controls {
+  display: flex;
+  align-items: center;
   color: #777;
   background: #fff;
-  padding: 22px 90px;
+  margin: 16px 90px 24px;
+}
+
+.search-controls > * {
+  margin-right: 14px;
 }
 
 main {
@@ -31,11 +37,6 @@ main {
 main .search-results-column {
   width: 600px;
   margin-right: 50px;
-}
-
-main .search-sidebar-column h5 {
-  color: var(--color-text--muted);
-  margin: 0 0 15px;
 }
 
 div.noquery-container {
