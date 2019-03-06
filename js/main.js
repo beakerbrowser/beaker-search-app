@@ -85,6 +85,10 @@ class Search extends LitElement {
     }
   }
 
+  get userUrl () {
+    return this.user ? this.user.url : ''
+  }
+
   get queryDatasets () {
     switch (this.category) {
       case 'sites': return 'sites'
@@ -140,7 +144,7 @@ class Search extends LitElement {
           <div class="spacer"></div>
           <a @click=${this.onClickAppMenu}><span class="fas fa-th"></span></a>
           <a class="todo"><span class="fas fa-bell"></span></a>
-          <a href="dat://profile"><img class="profile" src="/img/tmp-profile.png"></a>
+          <a href="intent:unwalled.garden/view-profile?url=${encodeURIComponent(this.userUrl)}"><img class="profile" src="/img/tmp-profile.png"></a>
         </header>
         <main>
           <img class="brand" src="/vendor/beaker-app-stdlib/img/beaker-logo.png">
@@ -159,7 +163,7 @@ class Search extends LitElement {
         <div class="spacer"></div>
         <a @click=${this.onClickAppMenu}><span class="fas fa-th"></span></a>
         <a class="todo"><span class="fas fa-bell"></span></a>
-        <a href="dat://profile"><img class="profile" src="/img/tmp-profile.png"></a>
+        <a href="intent:unwalled.garden/view-profile?url=${encodeURIComponent(this.userUrl)}"><img class="profile" src="/img/tmp-profile.png"></a>
       </header>
       <nav>
         <category-nav current-tab=${this.category} @change-tab=${this.onSetCategory}></category-nav>
