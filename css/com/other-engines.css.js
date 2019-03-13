@@ -3,20 +3,17 @@ import {css} from '/vendor/beaker-app-stdlib/vendor/lit-element/lit-element.js'
 const cssStr = css`
 .other-engines {
   width: 600px;
-  margin: 60px 0;
   color: #777;
 }
 
 .other-engines-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 10px;
+  display: inline-grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 
 .other-engines-grid a {
   display: inline-block;
-  border: 1px solid #ddd;
-  padding: 15px 20px;
+  padding: 15px 18px;
 
   /* remove link styles */
   color: inherit;
@@ -26,8 +23,7 @@ const cssStr = css`
 }
 
 .other-engines-grid a:hover {
-  border-color: #ccc;
-  background: #fafafa;
+  background: #eee;
 }
 
 .other-engines-grid a img {

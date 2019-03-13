@@ -22,6 +22,7 @@ class Search extends LitElement {
       hops: {type: String, reflect: true},
       since: {type: String, reflect: true},
       results: {type: Array},
+      hoveredOtherEngine: {type: String}
     }
   }
 
@@ -49,6 +50,7 @@ class Search extends LitElement {
     this.hops = QP.getParam('hops', 'all')
     this.since = QP.getParam('since', 'all')
     this.results = []
+    this.hoveredOtherEngine = ''
 
     this.user = null
     this.hasEverHadAQuery = false // track if we've ever had a query, and, if so, always show the results view
@@ -185,18 +187,29 @@ class Search extends LitElement {
   }
 
   renderOtherEngines () {
+    const link = (title, href) => html`
+      <a
+        class="link"
+        title="${title}"
+        href="${href}"
+        target="_blank"
+        @mouseenter=${this.onMouseenterOtherEngine}
+        @mouseleave=${this.onMouseleaveOtherEngine}
+      ><img src="/img/engines/${title.toLowerCase()}.png"></a>
+    `
+
     return html`
       <div class="other-engines">
-        <p>Try your search on other engines:</p>
         <div class="other-engines-grid">
-          <a class="link" href="https://duckduckgo.com${this.query ? '?q=' + encodeURIComponent(this.query) : ''}" target="_blank"><img src="/img/engines/duckduckgo.png"> DuckDuckGo</a>
-          <a class="link" href="https://google.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}" target="_blank"><img src="/img/engines/google.png"> Google</a>
-          <a class="link" href="https://en.wikipedia.org/wiki/Special:Search/${this.query ? '?q=' + encodeURIComponent(this.query) : ''}" target="_blank"><img src="/img/engines/wikipedia.png"> Wikipedia</a>
-          <a class="link" href="https://twitter.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}" target="_blank"><img src="/img/engines/twitter.png"> Twitter</a>
-          <a class="link" href="https://reddit.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}" target="_blank"><img src="/img/engines/reddit.png"> Reddit</a>
-          <a class="link" href="https://www.youtube.com/results?search_query=${this.query ? '?q=' + encodeURIComponent(this.query) : ''}" target="_blank"><img src="/img/engines/youtube.png"> YouTube</a>
-          <a class="link" href="https://github.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}" target="_blank"><img src="/img/engines/github.png"> GitHub</a>
+          ${link('DuckDuckGo', `https://duckduckgo.com${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
+          ${link('Google', `https://google.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
+          ${link('Wikipedia', `https://en.wikipedia.org/wiki/Special:Search/${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
+          ${link('Twitter', `https://twitter.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
+          ${link('Reddit', `https://reddit.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
+          ${link('YouTube', `https://www.youtube.com/results?search_query=${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
+          ${link('GitHub', `https://github.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
         </div>
+        ${this.hoveredOtherEngine ? html`<p>Try your search on ${this.hoveredOtherEngine}</p>` : ''}
       </div>
     `
   }
@@ -228,6 +241,14 @@ class Search extends LitElement {
 
   onSelectSinceFilter (e) {
     this.since = e.detail.choice
+  }
+
+  onMouseenterOtherEngine (e) {
+    this.hoveredOtherEngine = e.currentTarget.getAttribute('title')
+  }
+
+  onMouseleaveOtherEngine () {
+    this.hoveredOtherEngine = ''
   }
 }
 Search.styles = searchMainCSS
