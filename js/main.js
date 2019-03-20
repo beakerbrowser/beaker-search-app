@@ -178,6 +178,9 @@ class Search extends LitElement {
       <main>
         <div class="search-results-column">
           <search-results .results=${this.results} highlight-nonce="${this.highlightNonce}"></search-results>
+          ${this.results.length === 0
+            ? html`<div class="no-results">No results found. <a href="https://google.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}">Try your search on Google. &raquo;</a></div>`
+            : ''}
           ${this.renderOtherEngines()}
         </div>
         <div class="search-sidebar-column">
@@ -200,8 +203,8 @@ class Search extends LitElement {
     return html`
       <div class="other-engines">
         <div class="other-engines-grid">
-          ${link('DuckDuckGo', `https://duckduckgo.com${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
           ${link('Google', `https://google.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
+          ${link('DuckDuckGo', `https://duckduckgo.com${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
           ${link('Wikipedia', `https://en.wikipedia.org/wiki/Special:Search/${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
           ${link('Twitter', `https://twitter.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
           ${link('Reddit', `https://reddit.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}

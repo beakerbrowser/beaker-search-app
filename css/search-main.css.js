@@ -62,5 +62,15 @@ div.noquery-container search-control {
   width: 600px;
   height: 40px;
 }
+
+.no-results {
+  margin: 0 0 20px;
+  background: #fafafa;
+  padding: 20px;
+}
+
+.no-results a {
+  color: var(--blue);
+}
 `
 export default cssStr
