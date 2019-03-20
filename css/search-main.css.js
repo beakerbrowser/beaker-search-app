@@ -48,7 +48,7 @@ div.noquery-container main {
   width: 600px;
   margin: 0 auto;
   position: relative;
-  top: 35%;
+  top: 30%;
   align-items: center;
 }
 

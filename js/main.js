@@ -192,7 +192,6 @@ class Search extends LitElement {
         class="link"
         title="${title}"
         href="${href}"
-        target="_blank"
         @mouseenter=${this.onMouseenterOtherEngine}
         @mouseleave=${this.onMouseleaveOtherEngine}
       ><img src="/img/engines/${title.toLowerCase()}.png"></a>
