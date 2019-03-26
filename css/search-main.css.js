@@ -63,14 +63,17 @@ div.noquery-container search-control {
   height: 40px;
 }
 
-.no-results {
+.add-result a {
+  display: block;
   margin: 0 0 20px;
   background: #fafafa;
   padding: 20px;
+  color: var(--blue);
+  text-decoration: none;
 }
 
-.no-results a {
-  color: var(--blue);
+.add-result a:hover {
+  background: #f3f3f3;
 }
 `
 export default cssStr

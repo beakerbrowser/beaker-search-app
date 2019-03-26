@@ -1,7 +1,9 @@
 import {LitElement, html} from '/vendor/beaker-app-stdlib/vendor/lit-element/lit-element.js'
 import {pluralize} from '/vendor/beaker-app-stdlib/js/strings.js'
+import * as toast from '/vendor/beaker-app-stdlib/js/com/toast.js'
+import { BeakerEditBookmarkPopup } from '/vendor/beaker-app-stdlib/js/com/popups/edit-bookmark.js'
 import * as QP from './lib/query-params.js'
-import {profiles, search} from './tmp-beaker.js'
+import { bookmarks, profiles, search } from './tmp-beaker.js'
 import * as appMenu from '/vendor/beaker-app-stdlib/js/com/app-menu.js'
 import searchMainCSS from '../css/search-main.css.js'
 import './com/search-control.js'
@@ -45,7 +47,7 @@ class Search extends LitElement {
 
   constructor () {
     super()
-    this.query = QP.getParam('q')
+    this.query = decodeURIComponent(QP.getParam('q'))
     this.category = QP.getParam('category', 'all')
     this.hops = QP.getParam('hops', 'all')
     this.since = QP.getParam('since', 'all')
@@ -71,7 +73,7 @@ class Search extends LitElement {
       }
 
       // update the URL
-      QP.setParams({q: encodeURIComponent(newval)})
+      QP.setParams({q: newval})
 
       // run the query
       if (newval) {
@@ -80,7 +82,7 @@ class Search extends LitElement {
     }
     if (name === 'category' || name === 'hops' || name === 'since') {
       // update the URL
-      QP.setParams({[name]: encodeURIComponent(newval)})
+      QP.setParams({[name]: newval})
 
       // run the query
       this.runQuery()
@@ -95,7 +97,8 @@ class Search extends LitElement {
     switch (this.category) {
       case 'sites': return 'sites'
       case 'posts': return 'unwalled.garden/post'
-      default: return ['sites', 'unwalled.garden/post']
+      case 'bookmarks': return 'unwalled.garden/bookmark'
+      default: return ['sites', 'unwalled.garden/post', 'unwalled.garden/bookmark']
     }
   }
 
@@ -168,7 +171,11 @@ class Search extends LitElement {
         <a href="intent:unwalled.garden/view-profile?url=${encodeURIComponent(this.userUrl)}"><img class="profile" src="/img/tmp-profile.png"></a>
       </header>
       <nav>
-        <category-nav current-tab=${this.category} @change-tab=${this.onSetCategory}></category-nav>
+        <category-nav
+          current-tab=${this.category}
+          @change-tab=${this.onSetCategory}
+          @click-add-link=${this.onClickAddLink}
+        ></category-nav>
       </nav>
       <div class="search-controls">
         <div>${this.results.length} ${pluralize(this.results.length, 'result')} found.</div>
@@ -178,9 +185,9 @@ class Search extends LitElement {
       <main>
         <div class="search-results-column">
           <search-results .results=${this.results} highlight-nonce="${this.highlightNonce}"></search-results>
-          ${this.results.length === 0
-            ? html`<div class="no-results">No results found. <a href="https://google.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}">Try your search on Google. &raquo;</a></div>`
-            : ''}
+          <div class="add-result">
+            <a href="#" @click=${this.onClickAddLink}>+ Add a search result</a>
+          </div>
           ${this.renderOtherEngines()}
         </div>
         <div class="search-sidebar-column">
@@ -251,6 +258,21 @@ class Search extends LitElement {
 
   onMouseleaveOtherEngine () {
     this.hoveredOtherEngine = ''
+  }
+
+  async onClickAddLink (e) {
+    e.preventDefault()
+    var bookmark = await BeakerEditBookmarkPopup.create({
+      href: '',
+      title: '',
+      description: '',
+      tags: '',
+      public: true
+    }, {
+      fontawesomeSrc: '/vendor/beaker-app-stdlib/css/fontawesome.css'
+    })
+    await bookmarks.add(bookmark)
+    toast.create('Your bookmark has been added')
   }
 }
 Search.styles = searchMainCSS

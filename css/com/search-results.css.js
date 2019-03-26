@@ -65,15 +65,18 @@ ${commonCSS}
   height: 46px; /* has to be fixed height for the overlay to position correctly against it */
 }
 
-.post-author {
+.post-author,
+.link-author {
   color: var(--blue);
 }
 
-.post-author:hover {
+.post-author:hover,
+.link-author:hover {
   text-decoration: underline;
 }
 
-.post-date {
+.post-date,
+.link-date {
   color: var(--color-text--muted);
 }
 
@@ -99,5 +102,19 @@ ${commonCSS}
 .link-result-wrapper.post .link-result-overlay {
   padding: 16px;
 }
+
+.bookmark .url,
+.bookmark-description,
+.bookmark-details,
+.bookmark-tags {
+  margin-bottom: 2px;
+}
+
+.bookmark-details,
+.bookmark-tags {
+  color: gray;
+  font-size: 12px;
+}
+
 `
 export default cssStr

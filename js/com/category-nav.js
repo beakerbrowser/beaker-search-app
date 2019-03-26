@@ -7,7 +7,9 @@ class CategoryNav extends TabsNav {
     return [
       {id: 'all', label: 'All'},
       {id: 'sites', label: 'Websites'},
-      {id: 'posts', label: 'Posts'}
+      {id: 'posts', label: 'Posts'},
+      {id: 'bookmarks', label: 'Bookmarks'},
+      {label: '+ Add link', onClick: () => this.dispatchEvent(new Event('click-add-link'))}
     ]
   }
 }

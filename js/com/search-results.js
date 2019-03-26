@@ -3,7 +3,6 @@ import {repeat} from '/vendor/beaker-app-stdlib/vendor/lit-element/lit-html/dire
 import {unsafeHTML} from '/vendor/beaker-app-stdlib/vendor/lit-element/lit-html/directives/unsafe-html.js'
 import {highlightSearchResult, toNiceUrl} from '/vendor/beaker-app-stdlib/js/strings.js'
 import {timeDifference} from '/vendor/beaker-app-stdlib/js/time.js'
-import {findParent} from '/vendor/beaker-app-stdlib/js/dom.js'
 import searchResultsCSS from '../../css/com/search-results.css.js'
 
 class SearchResults extends LitElement {
@@ -25,6 +24,7 @@ class SearchResults extends LitElement {
 
   render() {
     return html`
+      <link rel="stylesheet" href="/vendor/beaker-app-stdlib/css/fontawesome.css">
       ${repeat(this.results, result => this.renderResult(result))}
     `
   }
@@ -33,6 +33,8 @@ class SearchResults extends LitElement {
     switch (result.record.type) {
       case 'unwalled.garden/post':
         return this.renderPostResult(result)
+      case 'unwalled.garden/bookmark':
+        return this.renderBookmarkResult(result)
       default:
         return this.renderSiteResult(result)
     }
@@ -65,6 +67,30 @@ class SearchResults extends LitElement {
             </div>
           </div>
         </div> 
+      </div>
+    `
+  }
+
+  renderBookmarkResult (result) {
+    return html`
+      <div class="result bookmark">
+        <div class="result-details">
+          <div class="title">
+            <a href="${result.content.href}">
+              ${unsafeHTML(highlightSearchResult(result.content.title, this.highlightNonce))}
+            </a>
+          </div>
+          <div class="bookmark-details">
+            <span class="fa fa-star"></span> by
+            <a class="bookmark-author" href="${result.record.author.url}">${result.record.author.title}</a>
+            <span class="bookmark-date">${timeDifference(result.createdAt)}</span>
+          </div>
+          <div class="bookmark-description">
+            ${unsafeHTML(highlightSearchResult(result.content.description, this.highlightNonce))}
+          </div>
+          <div class="url">${result.content.href}</div>
+          <div class="bookmark-tags">${unsafeHTML(highlightSearchResult(result.content.tags, this.highlightNonce))}</div>
+        </div>
       </div>
     `
   }
