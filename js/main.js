@@ -1,5 +1,5 @@
-import {LitElement, html} from '/vendor/beaker-app-stdlib/vendor/lit-element/lit-element.js'
-import {pluralize} from '/vendor/beaker-app-stdlib/js/strings.js'
+import { LitElement, html } from '/vendor/beaker-app-stdlib/vendor/lit-element/lit-element.js'
+import { pluralize } from '/vendor/beaker-app-stdlib/js/strings.js'
 import * as toast from '/vendor/beaker-app-stdlib/js/com/toast.js'
 import { BeakerEditBookmarkPopup } from '/vendor/beaker-app-stdlib/js/com/popups/edit-bookmark.js'
 import * as QP from './lib/query-params.js'
@@ -184,7 +184,7 @@ class Search extends LitElement {
       </div>
       <main>
         <div class="search-results-column">
-          <search-results .results=${this.results} highlight-nonce="${this.highlightNonce}"></search-results>
+          <search-results .results=${this.results} highlight-nonce="${this.highlightNonce}" user-url=${this.userUrl}></search-results>
           <div class="add-result">
             <a href="#" @click=${this.onClickAddLink}>+ Add a search result</a>
           </div>

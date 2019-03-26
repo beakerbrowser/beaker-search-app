@@ -116,5 +116,13 @@ ${commonCSS}
   font-size: 12px;
 }
 
+.bookmark-admin-btn {
+  padding: 0 4px;
+}
+
+.bookmark-admin-btn:hover {
+  border-radius: 2px;
+  background: rgba(0,0,0,.05);
+}
 `
 export default cssStr
