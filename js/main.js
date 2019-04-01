@@ -267,7 +267,7 @@ class Search extends LitElement {
       title: '',
       description: '',
       tags: '',
-      public: true
+      isPublic: true
     }, {
       fontawesomeSrc: '/vendor/beaker-app-stdlib/css/fontawesome.css'
     })
