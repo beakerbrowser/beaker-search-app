@@ -99,7 +99,7 @@ class SearchResults extends LitElement {
             ${unsafeHTML(highlightSearchResult(result.content.description, this.highlightNonce))}
           </div>
           <div class="url">${result.content.href}</div>
-          <div class="bookmark-tags">${unsafeHTML(highlightSearchResult(result.content.tags, this.highlightNonce))}</div>
+          <div class="bookmark-tags">${unsafeHTML(highlightSearchResult(result.content.tags.join(' '), this.highlightNonce))}</div>
         </div>
       </div>
     `
@@ -149,7 +149,6 @@ class SearchResults extends LitElement {
       // make update
       await bookmarks.edit(result.content.href, b)
       Object.assign(result.content, b)
-      result.content.tags = result.content.tags.join(' ')
       this.requestUpdate()
     } catch (e) {
       // ignore
