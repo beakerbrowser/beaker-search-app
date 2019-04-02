@@ -210,13 +210,12 @@ class Search extends LitElement {
     return html`
       <div class="other-engines">
         <div class="other-engines-grid">
-          ${link('Google', `https://google.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
-          ${link('DuckDuckGo', `https://duckduckgo.com${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
-          ${link('Wikipedia', `https://en.wikipedia.org/wiki/Special:Search/${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
           ${link('Twitter', `https://twitter.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
           ${link('Reddit', `https://reddit.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
           ${link('YouTube', `https://www.youtube.com/results?search_query=${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
           ${link('GitHub', `https://github.com/search${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
+          ${link('Wikipedia', `https://en.wikipedia.org/wiki/Special:Search/${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
+          ${link('DuckDuckGo', `https://duckduckgo.com${this.query ? '?q=' + encodeURIComponent(this.query) : ''}`)}
         </div>
         ${this.hoveredOtherEngine ? html`<p>Try your search on ${this.hoveredOtherEngine}</p>` : ''}
       </div>
