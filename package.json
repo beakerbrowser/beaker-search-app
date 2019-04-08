@@ -1,6 +1,6 @@
 {
   "name": "@beaker/search-app",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "The Beaker \"Search\" app ",
   "main": "index.html",
   "scripts": {
