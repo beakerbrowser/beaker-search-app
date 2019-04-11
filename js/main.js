@@ -6,6 +6,7 @@ import * as QP from './lib/query-params.js'
 import { bookmarks, profiles, search } from './tmp-beaker.js'
 import * as appMenu from '/vendor/beaker-app-stdlib/js/com/app-menu.js'
 import searchMainCSS from '../css/search-main.css.js'
+import '/vendor/beaker-app-stdlib/js/com/top-right-controls.js'
 import './com/search-control.js'
 import './com/category-nav.js'
 import './com/filters-dropdown.js'
@@ -165,10 +166,7 @@ class Search extends LitElement {
       <header>
         <img class="brand" src="/vendor/beaker-app-stdlib/img/beaker-logo.png">
         <search-control @submit-query=${this.onSubmitQuery} query=${this.query}></search-control>
-        <div class="spacer"></div>
-        <a @click=${this.onClickAppMenu}><span class="fas fa-th"></span></a>
-        <a class="todo"><span class="fas fa-bell"></span></a>
-        <a href="intent:unwalled.garden/view-profile?url=${encodeURIComponent(this.userUrl)}"><img class="profile" src="/img/tmp-profile.png"></a>
+        <beaker-top-right-controls .user=${this.user}></beaker-top-right-controls>
       </header>
       <nav>
         <category-nav
