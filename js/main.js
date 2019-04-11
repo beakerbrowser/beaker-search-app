@@ -1,9 +1,7 @@
 import { LitElement, html } from '/vendor/beaker-app-stdlib/vendor/lit-element/lit-element.js'
 import { pluralize } from '/vendor/beaker-app-stdlib/js/strings.js'
-import * as toast from '/vendor/beaker-app-stdlib/js/com/toast.js'
-import { BeakerEditBookmarkPopup } from '/vendor/beaker-app-stdlib/js/com/popups/edit-bookmark.js'
 import * as QP from './lib/query-params.js'
-import { bookmarks, profiles, search } from './tmp-beaker.js'
+import { profiles, search } from './tmp-beaker.js'
 import * as appMenu from '/vendor/beaker-app-stdlib/js/com/app-menu.js'
 import searchMainCSS from '../css/search-main.css.js'
 import '/vendor/beaker-app-stdlib/js/com/top-right-controls.js'
@@ -172,7 +170,6 @@ class Search extends LitElement {
         <category-nav
           current-tab=${this.category}
           @change-tab=${this.onSetCategory}
-          @click-add-link=${this.onClickAddLink}
         ></category-nav>
       </nav>
       <div class="search-controls">
@@ -183,9 +180,6 @@ class Search extends LitElement {
       <main>
         <div class="search-results-column">
           <search-results .results=${this.results} highlight-nonce="${this.highlightNonce}" user-url=${this.userUrl}></search-results>
-          <div class="add-result">
-            <a href="#" @click=${this.onClickAddLink}>+ Add a search result</a>
-          </div>
           ${this.renderOtherEngines()}
         </div>
         <div class="search-sidebar-column">
@@ -255,21 +249,6 @@ class Search extends LitElement {
 
   onMouseleaveOtherEngine () {
     this.hoveredOtherEngine = ''
-  }
-
-  async onClickAddLink (e) {
-    e.preventDefault()
-    var bookmark = await BeakerEditBookmarkPopup.create({
-      href: '',
-      title: '',
-      description: '',
-      tags: '',
-      isPublic: true
-    }, {
-      fontawesomeSrc: '/vendor/beaker-app-stdlib/css/fontawesome.css'
-    })
-    await bookmarks.add(bookmark)
-    toast.create('Your bookmark has been added')
   }
 }
 Search.styles = searchMainCSS
